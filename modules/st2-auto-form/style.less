@@ -1,5 +1,9 @@
+@import (reference) '/components/bootstrap/less/variables.less';
+@import (reference) '/components/bootstrap/less/mixins.less';
+@import (reference) '/components/bootstrap/less/forms.less';
+
 @import "colors";
-@import "bs.forms.less";
+@import "/components/bootstrap/less/utilities.less";
 
 .st2-auto-form {
   position: relative;
@@ -84,6 +88,7 @@
     height: 28px;
     line-height: 28px;
     box-sizing: border-box;
+    box-shadow: none;
   }
 
   &__description {
@@ -92,5 +97,51 @@
     height: 100%;
     right: 0;
     overflow: hidden;
+  }
+
+  &__form-group
+  :extend(.form-group) {
+    position: relative;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+    &--right:extend(.pull-right) {}
+  }
+
+  &__form-control
+  :extend(.form-control) {
+    width: 100%;
+    padding: 0 0 0 10px;
+    margin-right: 10px;
+    &--left:extend(.pull-left) {}
+    &--non-editable {
+      background-color: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      margin-top: -8px;
+    }
+    &--highlighted {
+      font-family: Oswald;
+      font-weight: bolder;
+      font-size: 18px;
+      color: #666;
+    }
+  }
+
+  &__help-block
+  :extend(.help-block) {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+
+  &__column-left {
+    width:48%;
+    float: left;
+  }
+
+  &__column-right {
+    width: 48%;
+    float: right;
   }
 }

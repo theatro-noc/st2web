@@ -1,8 +1,14 @@
-<label for="{{name}}">{{ (field.name || name) | capitalize }}</label>
+<div class="st2-auto-form__row clearfix">
+  <div class="st2-auto-form__column-left">
+    <label for="{{name}}">{{ (field.name || name) | capitalize }}</label>
 
-<select class="st2-details__form-control"
-  id="{{name}}"
-  ng-model="result[name]"
-  ng-options="v for v in field.enum"></select>
+    <select class="st2-auto-form__form-control"
+      id="{{name}}"
+      ng-model="result[name]"
+      ng-options="v for v in field.enum"></select>
+  </div>
 
-<p class="st2-details__help-block">{{ field.description }}</p>
+  <div class="st2-auto-form__column-right">
+    <p class="st2-auto-form__help-block">{{ field.description }}</p>
+  </div>
+</div>

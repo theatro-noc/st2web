@@ -1,9 +1,15 @@
-<label for="{{name}}">{{ (field.name || name) | capitalize }}</label>
+<div class="st2-auto-form__row clearfix">
+  <div class="st2-auto-form__column-left">
+    <label for="{{name}}">{{ (field.name || name) | capitalize }}</label>
 
-<input type="checkbox"
-  class="st2-details__form-control"
-  id="{{name}}"
-  placeholder="{{field.default}}"
-  ng-model="result[name]">
+    <input type="checkbox"
+      class="st2-auto-form__form-control"
+      id="{{name}}"
+      placeholder="{{field.default}}"
+      ng-model="result[name]">
+  </div>
 
-<p class="st2-details__help-block">{{ field.description }}</p>
+  <div class="st2-auto-form__column-right">
+    <p class="st2-auto-form__help-block">{{ field.description }}</p>
+  </div>
+</div>
