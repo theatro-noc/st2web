@@ -19,12 +19,15 @@
 
   background-color: #eee;
 
-  transition: transform 0.4s;
+  &__details {
+    transform: translate3d(0,0,0);
+    width: 0;
 
-  transform: translate3d(0,0,0);
+    transition: width 0.4s;
+  }
 
-  &--slide {
-    transform: translate3d(-640px,0,0);
+  &--slide &__details {
+    width: 640px;
   }
 
   &__back-button {

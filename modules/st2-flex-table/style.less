@@ -1,9 +1,14 @@
 .st2-flex-table {
   margin-bottom: 10px;
+  transform: translate3d(0,0,0);
 
   &__row, &__header {
     display: flex;
+    flex-wrap: wrap;
     border-bottom: 1px solid #ccc;
+
+    overflow: hidden;
+    height: 40px;
   }
 
   &__header {
@@ -16,7 +21,7 @@
     // elements with padding. Lets hack it for now with &:before.
     // padding: 10px;
     // box-sizing: border-box;
-    padding: 10px 0;
+    line-height: 40px;
 
     &:before {
       content: '\0000a0';
