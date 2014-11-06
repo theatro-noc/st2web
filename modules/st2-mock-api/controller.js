@@ -1,6 +1,6 @@
 'use strict';
 angular.module('mockMain', ['main', 'ngMockE2E'])
-  .run(function($httpBackend) {
+  .run(function($httpBackend, config) {
 
     var escRegexp = function(s) {
       return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -3002,10 +3002,9 @@ angular.module('mockMain', ['main', 'ngMockE2E'])
     $httpBackend.whenGET(/\.html$/).passThrough();
 
     // Pass through real API
-    var storedHost = localStorage.getItem('st2Host');
-    if (storedHost) {
-      $httpBackend.whenGET(new RegExp('^' + escRegexp(storedHost))).passThrough();
-      $httpBackend.whenPOST(new RegExp('^' + escRegexp(storedHost))).passThrough();
+    if (config.endpoint) {
+      $httpBackend.whenGET(new RegExp('^' + escRegexp(config.endpoint))).passThrough();
+      $httpBackend.whenPOST(new RegExp('^' + escRegexp(config.endpoint))).passThrough();
     }
 
   });

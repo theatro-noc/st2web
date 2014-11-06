@@ -41,13 +41,11 @@ You can see the whole list of tasks in `gulpfile.js`.
 Using real data
 ---------------
 
-To make development go faster, our UI uses mock data out the box. To make it work with a real API, open your browser console and execute the line:
+Out the box, UI tries to get its data from locally deployed development environment.
 
-    localStorage.setItem('st2Host', '//st2stage001.stackstorm.net:9101')
+To make it work with a real API, you would need to edit `config.js` at the root of the project and update the `endpoint` parameter with proper url (including scheme, domain and port, but without the tailing slash). For vagrant deployment of [st2express](https://github.com/StackStorm/st2express), it would be:
 
-It would make `//st2stage001.stackstorm.net:9101` an st2 host (as internal persistent variable) for this particular browser. To get back to mock data, just remove the persistent record by issuing the command:
-
-    localStorage.removeItem('st2Host')
+    'endpoint': 'http://172.168.90.50:9101'
 
 Testing
 -------

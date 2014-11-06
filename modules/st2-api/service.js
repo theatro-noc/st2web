@@ -1,10 +1,8 @@
 'use strict';
 
 angular.module('main')
-  .service('st2Api', function($resource, $rootScope, $http) {
-    var storedHost = localStorage.getItem('st2Host');
-
-    var HOST = storedHost || '//localhost';
+  .service('st2Api', function($resource, $rootScope, $http, config) {
+    var HOST = config.endpoint || '//localhost';
 
     var scope = $rootScope.$new();
 
