@@ -38,12 +38,12 @@ While `gulp` runs the longest chain of tasks including style compiling, spining 
 
 You can see the whole list of tasks in `gulpfile.js`.
 
-Using real data
----------------
+Connecting to st2 server
+-------------------------
 
-Out the box, UI tries to get its data from locally deployed development environment.
+By default, UI tries to get its data from the [devenv](https://www.github.com/StackStorm/devenv) vagrant box on 172.168.50.50.
 
-To make it work with a real API, you would need to edit `config.js` at the root of the project and update the `endpoint` parameter with proper url (including scheme, domain and port, but without the tailing slash). For vagrant deployment of [st2express](https://github.com/StackStorm/st2express), it would be:
+To make it work with your st2 API, edit [`config.js`](./config.js) at the root of the project and update the `endpoint` parameter with proper url (including scheme, domain and port, but without the tailing slash). For vagrant deployment of [st2express](https://github.com/StackStorm/st2express), it would be:
 
     'endpoint': 'http://172.168.90.50:9101'
 
