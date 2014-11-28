@@ -20,7 +20,7 @@ angular.module('main', ['ui.router', 'angularMoment', 'hljs'])
   });
 
 angular.module('main')
-  .controller('MainCtrl', function ($rootScope, $state) {
+  .controller('MainCtrl', function ($scope, $rootScope, $state) {
     $rootScope.state = $state;
     $rootScope._ = _;
 

@@ -30,6 +30,7 @@
   <script src="modules/st2-auto-form/modules/st2-form-checkbox/directive.js"></script>
   <script src="modules/st2-auto-form/modules/st2-form-input/directive.js"></script>
   <script src="modules/st2-auto-form/modules/st2-form-select/directive.js"></script>
+  <script src="modules/st2-client/service.js"></script>
   <script src="modules/st2-filter/directive.js"></script>
   <script src="modules/st2-flex-table/directive.js"></script>
   <script src="modules/st2-label/directive.js"></script>
@@ -42,13 +43,11 @@
   <script src="apps/st2-history/controller.js"></script>
   <script src="apps/st2-history/modules/st2-action-reporter/directive.js"></script>
   <script src="apps/st2-history/modules/st2-history-child/directive.js"></script>
+  <script src="apps/st2-login/controller.js"></script>
   <script src="apps/st2-rules/controller.js"></script>
   <!-- endbuild -->
 </head>
 
-<body>
-  <header class="st2-menu"></header>
+<body ui-view></body>
 
-  <main ui-view></main>
-</body>
 </html>

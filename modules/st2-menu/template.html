@@ -14,15 +14,13 @@
 </ul>
 
 <div class="st2-menu__server">
-  <span class="st2-menu__server-current">{{ getServer() }}</span>
+  <span class="st2-menu__server-current">{{ user }}</span>
   <div class="st2-menu__server-list">
     <div class="st2-menu__server-current">
-      {{ getServer() }}
+      {{ user }}
     </div>
-    <div class="st2-menu__server-item"
-        ng-repeat="server in serverList | filter:{name: '!' + getServer()}"
-        ng-click="setServer(server)">
-      {{ server.name }}
+    <div class="st2-menu__server-item" ng-click="logout()">
+      Log out
     </div>
   </div>
 </div>

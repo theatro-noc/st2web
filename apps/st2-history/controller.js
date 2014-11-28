@@ -29,14 +29,14 @@ angular.module('main')
 
     var pHistoryList;
 
-    st2api.historyFilters.list().then(function (filters) {
+    st2api.client.historyFilters.list().then(function (filters) {
       // TODO: when the field is not required, an abscense of a value should also be a value
       $scope.filters = filters;
       $scope.$apply();
     });
 
     var listUpdate = function () {
-      pHistoryList = st2api.history.list(_.assign({
+      pHistoryList = st2api.client.history.list(_.assign({
         parent: 'null',
         page: $rootScope.page
       }, $scope.$root.filters));
@@ -58,7 +58,7 @@ angular.module('main')
           })
           .value();
 
-        $rootScope.$emit('$fetchFinish', st2api.history);
+        $rootScope.$emit('$fetchFinish', st2api.client.history);
 
         $scope.$apply();
       }).catch(function (err) {
@@ -77,7 +77,7 @@ angular.module('main')
         };
       }
 
-      var promise = id ? st2api.history.get(id) : pHistoryList.then(function (actions) {
+      var promise = id ? st2api.client.history.get(id) : pHistoryList.then(function (actions) {
         return _.first(actions);
       });
 
@@ -104,7 +104,7 @@ angular.module('main')
       record._expanded = !record._expanded;
 
       if (record._expanded) {
-        st2api.history.list({
+        st2api.client.history.list({
           'parent': record.id
         }).then(function (records) {
           record._children = records;

@@ -1,13 +1,5 @@
 @import "colors";
 
-@gray-dark: #2e2e2e;
-@gray-darker: #1e1e1e;
-@gray: #6c6c6c;
-@gray-light: #a4a4a4;
-@gray-lighter: #d9d9d9;
-@gray-lightest: #eaeaeb;
-@gray-white: #f4f4f4;
-
 .st2-auto-form {
   position: relative;
 
@@ -93,15 +85,15 @@
       text-decoration: inherit;
       margin-right: .3em;
 
-      border: 0;
-      box-shadow: inset 0 2px 3px rgba(0, 0, 0, 1);
+      border: 1px solid;
+      border-color: fade(@gray-darkest, 50%) fade(@gray-dull, 30%) fade(@gray, 50%);
       border-radius: 4px;
 
       width: 14px;
       height: 14px;
       line-height: 12px;
 
-      background-color: @gray;
+      background-color: @gray-dark;
       color: #01C8FF;
     }
 

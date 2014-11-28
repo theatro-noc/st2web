@@ -1,3 +1,5 @@
+@import "colors";
+
 .st2-forms {
   &__matcher {
     overflow: hidden;
@@ -76,6 +78,86 @@
     &:after {
       border-left-color: #ff8300;
       left: 100%;
+    }
+  }
+
+  &__field {
+    width: 100%;
+    padding: 0 0 0 10px;
+    box-sizing: border-box;
+
+    font-weight: normal;
+
+    background-color: @gray-dark;
+    color: #fff;
+
+    border: 1px solid;
+    border-color: fade(@gray-darkest, 50%) fade(@gray-dull, 30%) fade(@gray, 50%);
+    border-radius: 4px;
+
+    height: 30px;
+
+    outline: 0;
+
+    &[readonly] {
+      border-color: transparent;
+      cursor: not-allowed;
+    }
+
+    &[disabled] {
+      border-color: transparent;
+      cursor: default;
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+
+    &:invalid {
+      // TODO: not sure whether this is intentional or a bug, but shadow doesn't match
+      box-shadow: none;
+    }
+  }
+
+  &__checkbox {
+    display: none;
+    margin: 0;
+    padding: 0;
+
+    &-label {
+      user-select: none;
+      cursor: pointer;
+
+      vertical-align: top;
+    }
+
+    & + &-label:before {
+      content: '\00a0';
+      font-family: "ststanley";
+      font-style: normal;
+      font-weight: normal;
+
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: .3em;
+
+      border: 1px solid;
+      border-color: fade(@gray-darkest, 50%) fade(@gray-dull, 30%) fade(@gray, 50%);
+      border-radius: 4px;
+
+      width: 14px;
+      height: 14px;
+      line-height: 12px;
+
+      background-color: @gray-dark;
+      color: #01C8FF;
+    }
+
+    &:checked + &-label:before {
+      content: '\e80a';
+
+      text-shadow: 1px 0px 1px #000,
+                   1px 1px 1px #000;
     }
   }
 }

@@ -1,15 +1,45 @@
-/*global st2client:true*/
-// ^^ we should not use st2api global variable anywhere else outside the module
 'use strict';
 
 angular.module('main')
-  .service('st2api', function () {
-    var parser = document.createElement('a');
-    parser.href = localStorage.getItem('st2Host');
+  .service('st2api', function ($window, st2Client, $rootScope) {
+    var key = 'st2AuthToken'
+      , token = JSON.parse($window.localStorage.getItem(key));
 
-    return st2client({
-      protocol: parser.protocol.split(':')[0],
-      host: parser.hostname,
-      port: parser.port
-    });
+    var scope = $rootScope.$new(true);
+
+    scope.token = token;
+
+    if (token) {
+      scope.client = st2Client(token.url);
+    }
+
+    scope.login = function (url, user, password, remember) {
+      if (this.isAuthenticated()) {
+        throw {
+          name: 'Error',
+          message: 'Another user is already authenticated'
+        };
+      }
+
+      return st2Client(url).auth.authenticate(user, password).then(function (token) {
+        token.url = url;
+        if (remember) {
+          $window.localStorage.setItem(key, JSON.stringify(token));
+        }
+        this.token = token;
+        scope.$apply();
+      }.bind(this));
+
+    };
+
+    scope.logout = function () {
+      $window.localStorage.removeItem(key);
+      scope.token = null;
+    };
+
+    scope.isAuthenticated = function () {
+      return !!this.token;
+    };
+
+    return scope;
   });

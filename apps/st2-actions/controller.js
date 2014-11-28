@@ -32,7 +32,7 @@ angular.module('main')
 
     $scope.filter = '';
 
-    var pActionList = st2api.actionOverview.list().catch(function (response) {
+    var pActionList = st2api.client.actionOverview.list().catch(function (response) {
       $scope.groups = [];
       console.error('Failed to fetch the data: ', response);
     });
@@ -53,7 +53,7 @@ angular.module('main')
     $scope.$watch('filter', listUpdate);
 
     $scope.$watch('$root.state.params.id', function (id) {
-      var promise = id ? st2api.actionOverview.get(id) : pActionList.then(function (actions) {
+      var promise = id ? st2api.client.actionOverview.get(id) : pActionList.then(function (actions) {
         return _.first(actions);
       });
 
@@ -65,7 +65,7 @@ angular.module('main')
         $scope.reloadExecutions(action);
 
         if ($scope.actionHasFile(action)) {
-          st2api.actionEntryPoint.get(action.id).then(function (file) {
+          st2api.client.actionEntryPoint.get(action.id).then(function (file) {
             $scope.file = file;
             $scope.$apply();
           }).catch(function (err) {
@@ -80,7 +80,7 @@ angular.module('main')
     $scope.reloadExecutions = function (action) {
       $scope.inProgress = true;
 
-      return st2api.history.list({
+      return st2api.client.history.list({
         'action': $scope.$root.getRef(action),
         'limit': 5,
         'parent': 'null'
@@ -96,7 +96,7 @@ angular.module('main')
 
     // Running an action
     $scope.runAction = function (action, payload) {
-      st2api.actionExecutions.create({
+      st2api.client.actionExecutions.create({
         action: $scope.$root.getRef(action),
         parameters: payload
       }).then(function (execution) {
@@ -108,7 +108,7 @@ angular.module('main')
         $scope.$apply();
 
         // Update it until it gets resolved
-        st2api.history.watchCollection({
+        st2api.client.history.watchCollection({
           execution: execution.id
         }, function (records) {
           var record = records[0];

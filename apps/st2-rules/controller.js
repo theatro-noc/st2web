@@ -33,7 +33,7 @@ angular.module('main')
 
     $scope.filter = '';
 
-    var pRulesList = st2api.rules.list().catch(function (response) {
+    var pRulesList = st2api.client.rules.list().catch(function (response) {
       $scope.rules = [];
       console.error('Failed to fetch the data: ', response);
       $scope.$apply();
@@ -54,7 +54,7 @@ angular.module('main')
     $scope.$watch('filter', listUpdate);
 
     $scope.$watch('$root.state.params.id', function (id) {
-      var promise = id ? st2api.rules.get(id) : pRulesList.then(function (actions) {
+      var promise = id ? st2api.client.rules.get(id) : pRulesList.then(function (actions) {
         return _.first(actions);
       });
 
@@ -62,14 +62,14 @@ angular.module('main')
         if (rule) {
           $scope.rule = rule;
 
-          st2api.triggerTypes.get(rule.trigger.type).then(function (triggerTypes) {
+          st2api.client.triggerTypes.get(rule.trigger.type).then(function (triggerTypes) {
             var schema = triggerTypes.parameters_schema.properties;
             $scope.triggerSchema = disable(schema);
             $scope.$apply();
           });
 
           // TODO: Fix after STORM-810 gets resolved
-          st2api.actionOverview.list()
+          st2api.client.actionOverview.list()
             .then(function (actions) {
               var action = _.find(actions, function (action) {
                 return [action.pack, action.name].join('.') === rule.action.ref;
