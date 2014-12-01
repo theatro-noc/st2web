@@ -10,7 +10,7 @@ angular.module('main')
     scope.token = token;
 
     if (token) {
-      scope.client = st2Client(token.url);
+      scope.client = st2Client(token.url).setToken(token);
     }
 
     scope.login = function (url, user, password, remember) {
@@ -21,7 +21,7 @@ angular.module('main')
         };
       }
 
-      return st2Client(url).auth.authenticate(user, password).then(function (token) {
+      return st2Client(url).authenticate(user, password).then(function (token) {
         token.url = url;
         if (remember) {
           $window.localStorage.setItem(key, JSON.stringify(token));
