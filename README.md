@@ -41,12 +41,12 @@ You can see the whole list of tasks in `gulpfile.js`.
 Connecting to st2 server
 -------------------------
 
-By default, UI tries to get its data from the [devenv](https://www.github.com/StackStorm/devenv) vagrant box on 172.168.50.50.
+By default, UI is set to get its data from the st2 server on [devenv](https://www.github.com/StackStorm/devenv) vagrant box on 172.168.50.50.
 
 To make it work with your st2 API, edit [`config.js`](./config.js) at the root of the project and update the `hosts` array with proper object of **name** and **url** (including scheme, domain and port). For vagrant deployment of [st2express](https://github.com/StackStorm/st2express), it would be:
 
     hosts: [{
-      name: 'Express Deployment'
+      name: 'st2express'
       url: 'http://172.168.90.50:9101'
     }]
 
