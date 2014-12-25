@@ -4,7 +4,7 @@ angular.module('main')
     // TODO: figure out what other fields do we need.
     // TODO: create an interface to extend the list of fields.
     var fieldTypes = {
-      'string': 'st2-form-input',
+      'string': 'st2-form-textarea',
       'integer': 'st2-form-input',
       'number': 'st2-form-input',
       'boolean': 'st2-form-checkbox',

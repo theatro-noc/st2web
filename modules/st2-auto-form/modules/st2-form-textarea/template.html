@@ -1,0 +1,20 @@
+<label class="st2-auto-form__label"
+  ng-class="{'st2-auto-form--required': spec.required}">
+
+  <div class="st2-auto-form__title">
+    {{ spec.name || name }}
+  </div>
+
+  <textarea
+    class="st2-auto-form__field"
+    placeholder="{{spec.default}}"
+    ng-required="spec.required"
+    ng-model="result"
+    ng-disabled="spec.disabled">
+  </textarea>
+
+</label>
+
+<p class="st2-auto-form__description">
+  {{ spec.description }}
+</p>
