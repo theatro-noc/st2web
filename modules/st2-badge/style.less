@@ -1,0 +1,41 @@
+.st2-badge {
+  display: block;
+
+  width: 13px;
+  height: 13px;
+  margin-top: 10px;
+
+  border-radius: 1em;
+  background-color: #777;
+
+  &--primary {
+    background-color: #428bca;
+  }
+  &--success {
+    background-color: #5cb85c;
+  }
+  &--info {
+    background-color: #5bc0de;
+  }
+  &--warning {
+    background-color: #f0ad4e;
+  }
+  &--danger {
+    background-color: #d9534f;
+  }
+
+  &--failed {
+    background-color: #d9534f;
+  }
+
+  &--succeeded {
+    background-color: #5cb85c;
+  }
+
+  &--progress {
+    &:before {
+      content: '\e806';
+      animation: spin 2s infinite linear;
+    }
+  }
+}
