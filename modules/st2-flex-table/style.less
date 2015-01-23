@@ -6,7 +6,7 @@
   margin-bottom: 20px;
 
   color: @text;
-  background-color: @gray-lightest;
+  background-color: transparent;
   box-shadow: 0 0 5px rgba(0,0,0,.7);
 
   &__caption {
@@ -117,6 +117,9 @@
   &__row {
     &--even {
       background-color: @gray-white;
+    }
+    &--odd {
+      background-color: @gray-lightest;
     }
 
     &&--active,
