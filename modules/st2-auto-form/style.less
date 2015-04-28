@@ -81,6 +81,53 @@
     &.ng-touched.ng-invalid {
       box-shadow: 0 0 0 1px red;
     }
+
+    &:focus {
+      // TODO @gmedrano: apparently, we need another color in between of darker and darkest.
+      background-color: fade(@blue-darkest, 60%);
+    }
+
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 #000;
+    }
+
+    option {
+      color: white;
+    }
+  }
+
+  &__select {
+    position: relative;
+
+    &:after {
+      font-family: 'ststanley';
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 36px;
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      display: block;
+
+      padding: 0 10px 0 0;
+
+      content: '\e804';
+      vertical-align: middle;
+      pointer-events: none;
+    }
+  }
+
+  &__select &__field {
+    padding-right: 30px;
+
+    border-radius: 0;
+
+    -webkit-appearance: none;
+       -moz-appearance: none;
   }
 
   &__checkbox {

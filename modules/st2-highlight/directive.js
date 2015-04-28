@@ -1,13 +1,8 @@
-/*global hljs:true*/
+/*global Prism:true*/
 'use strict';
 
 angular.module('main')
-  .config(function () {
-    hljs.configure({
-      languages: ['json']
-    });
-  })
-  .directive('st2Highlight', function ($filter) {
+  .directive('st2Highlight', function () {
 
     function getType(string) {
       try {
@@ -31,21 +26,26 @@ angular.module('main')
       var LINES_TO_SHOW = scope.lines ? parseInt(scope.lines) : 5;
 
       scope.$watch('code', function (code) {
-        scope.type = getType(code);
 
-        scope.string = {
-          json: function () {
-            return hljs.highlight('json', $filter('json')(JSON.parse(code))).value;
-          },
-          string: function () {
-            return code && code.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-              return '&#'+i.charCodeAt(0)+';';
-            });
-          },
-          object: function () {
-            return code && hljs.highlight('json', $filter('json')(code)).value;
-          }
-        }[scope.type](code);
+        if (scope.language && Prism.languages[scope.language]) {
+          scope.string = code && Prism.highlight(code, Prism.languages[scope.language]);
+        } else {
+          var type = getType(code);
+
+          scope.string = {
+            json: function () {
+              return code && Prism.highlight(code, Prism.languages['javascript']);
+            },
+            string: function () {
+              return code && code.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+                return '&#'+i.charCodeAt(0)+';';
+              });
+            },
+            object: function () {
+              return code && Prism.highlight(code, Prism.languages['javascript']);
+            }
+          }[type](code);
+        }
 
         if (scope.full) {
           scope.shortString = scope.string;
@@ -76,7 +76,8 @@ angular.module('main')
       scope: {
         code: '=',
         full: '@',
-        lines: '@'
+        lines: '@',
+        language: '@'
       },
       templateUrl: 'modules/st2-highlight/template.html',
       link: postLink
