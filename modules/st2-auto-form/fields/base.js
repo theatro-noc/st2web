@@ -6,6 +6,7 @@ import { TextFieldWrapper } from '../wrappers';
 export class BaseTextField extends React.Component {
   static propTypes = {
     name: React.PropTypes.string,
+    className: React.PropTypes.string,
     spec: React.PropTypes.object,
     value: React.PropTypes.any,
     disabled: React.PropTypes.bool,

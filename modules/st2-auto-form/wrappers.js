@@ -27,7 +27,7 @@ class Title extends React.Component {
   render() {
     let name = this.props.spec.name || this.props.name;
 
-    if (this.props.spec.required) {
+    if (name && this.props.spec.required) {
       name += ' *';
     }
 
@@ -104,26 +104,142 @@ class Description extends React.Component {
   }
 }
 
+class Suggester extends React.Component {
+  static propTypes = {
+    suggestions: React.PropTypes.array,
+    onSelect: React.PropTypes.func
+  }
+
+  state = {
+    selected: 0
+  }
+
+  previous() {
+    let { selected } = this.state;
+
+    selected -= 1;
+
+    selected = selected >= 0 ? selected : 0;
+
+    this.setState({ selected });
+  }
+
+  next() {
+    let { selected } = this.state;
+
+    selected += 1;
+
+    selected = selected < this.suggestions.length ? selected : this.props.suggestions.length;
+
+    this.setState({ selected });
+  }
+
+  handleClick(e, name) {
+    e.stopPropagation();
+
+    if (this.onSelect) {
+      return this.onSelect(name);
+    }
+  }
+
+  render() {
+    const props = {
+      className: 'st2-auto-form__suggestions'
+    };
+
+    const nameProps = {
+      className: 'st2-details__header-name'
+    };
+
+    const descriptionProps = {
+      className: 'st2-details__header-description'
+    };
+
+    return <div {...props}>
+      {
+        this.props.suggestions.map(({ name, description }, i) => {
+          const suggestionProps = {
+            key: name,
+            className: 'st2-auto-form__suggestion',
+            onClick: (e) => console.log(e, name)
+          };
+
+          if (i === this.state.selected) {
+            suggestionProps.className += ' ' + 'st2-auto-form__suggestion--active';
+          }
+
+          return <div {...suggestionProps}>
+            <div {...nameProps}>{ name }</div>
+            <div {...descriptionProps}>{ description }</div>
+          </div>;
+        })
+      }
+    </div>;
+  }
+}
+
 export class TextFieldWrapper extends React.Component {
   static propTypes = {
     name: React.PropTypes.string,
     spec: React.PropTypes.object,
+    className: React.PropTypes.string,
     value: React.PropTypes.any,
     invalid: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     children: React.PropTypes.element.isRequired,
     icon: React.PropTypes.string,
+    suggestions: React.PropTypes.array,
     labelClass: React.PropTypes.string
   }
 
+  handleKeydown(e) {
+    if (this.props.suggestions) {
+      if (e.keyCode === 38) {
+        e.preventDefault();
+        this.refs.suggester.previous();
+      }
+
+      if (e.keyCode === 40) {
+        e.preventDefault();
+        this.refs.suggester.next();
+      }
+
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        console.log('enter');
+      }
+    }
+  }
+
   render() {
-    const line = <div className='st2-auto-form__line'>
+    const lineProps = {
+      className: 'st2-auto-form__line'
+    };
+
+    if (this.props.className) {
+      lineProps.className += ' ' + this.props.className;
+    }
+
+    const suggesterProps = {
+      ref: 'suggester',
+      suggestions: this.props.suggestions,
+      onSelect: (...args) => this.handleSuggestion(...args)
+    };
+
+    const extChildProps = {};
+
+    if (this.props.suggestions) {
+      extChildProps.onKeyDown = (e) => this.handleKeydown(e);
+    }
+
+    const line = <div {...lineProps}>
       <Label className={this.props.labelClass} >
         <Title {...this.props} />
         <ErrorMessage>{ this.props.invalid }</ErrorMessage>
         <Icon name={ this.props.icon } />
-        { this.props.children }
+        { React.cloneElement(this.props.children, extChildProps) }
       </Label>
+      { !!this.props.suggestions && <Suggester {...suggesterProps} /> }
       <Description {...this.props} />
     </div>;
 

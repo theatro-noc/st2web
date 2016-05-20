@@ -21,7 +21,7 @@ export default class Enum extends BaseTextField {
       return invalid;
     };
 
-    return v && !_.contains(spec.enum, v) && `'${v}' not in enum`;
+    return v && !_.find(spec.enum, (item) => v === item || v === item.key) && `'${v}' not in enum`;
   }
 
   render() {
@@ -53,7 +53,23 @@ export default class Enum extends BaseTextField {
           !spec.required && <option value='' ></option>
         }
         {
-          _.map(spec.enum, (v) => <option key={v} value={v} >{ v }</option>)
+          _.map(spec.enum, (v) => {
+            const props = {
+              key: v,
+              value: v,
+              children: v
+            };
+
+            if (_.isPlainObject(v)) {
+              const { key, value } = v;
+
+              props.key = key;
+              props.value = key;
+              props.children = value;
+            };
+
+            return <option {...props} />;
+          })
         }
       </select>
     </TextFieldWrapper>;
