@@ -1,10 +1,13 @@
 'use strict';
 
-var _ = require('lodash')
-  ;
+var _ = require('lodash');
 
 module.exports =
-  function st2RulesCtrl($scope, st2api, Notification) {
+    function st2RulesCtrl($scope, st2api, Notification) {
+
+    $scope.printer = function () {
+        console.log($scope.newRule);
+    };
 
     $scope.filter = '';
     $scope.error = null;
@@ -228,6 +231,7 @@ module.exports =
     $scope.submit = function () {
       var oldRulePack = $scope.ruleMeta.pack;
 
+      Notification.criticalError(new Error(1), $scope.rule.toString());
       st2api.client.rules.edit(angular.copy($scope.rule)).then(function (rule) {
         $scope.rule = rule;
         $scope.ruleMeta = _.cloneDeep(rule);
@@ -300,6 +304,8 @@ module.exports =
         $scope.$root.go('^.new');
       },
       submit: function () {
+          console.log($scope.newRule);
+          console.log(JSON.stringify($scope.newRule));
         st2api.client.rules.create(angular.copy($scope.newRule)).then(function (rule) {
           $scope.newform.$setPristine();
           $scope.newform.saved = true;

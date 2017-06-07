@@ -1,0 +1,130 @@
+@import 'colors';
+
+//.st2-cron__content {
+//  font-size: 12pt !important;
+//
+//  width: 50%;
+//  margin: 0 auto;
+//  padding: 5px;
+//
+//  color: black !important;
+//  background-color: lightgray;
+//}
+
+form br {
+  display: block;
+
+  margin: 2px 0;
+}
+
+.short {
+  width: 60px !important;
+}
+
+.st2-cron__timepicker {
+  width: auto !important;
+  padding-left: 3px;
+}
+
+.st2-rules {
+  // Table columns
+
+  .st2-flex-table {
+    &__column {
+      position: relative;
+
+      padding: 10px 15px;
+    }
+    &__row {
+      padding: 0;
+    }
+
+    &--collapsed {
+      padding-bottom: 0;
+
+      .st2-flex-table__caption {
+        border-bottom: 0;
+      }
+
+      .st2-flex-rule {
+        display: none;
+      }
+    }
+  }
+
+  &__column-name {
+    font-size: 16px;
+
+    overflow: hidden;
+
+    margin-right: 35px;
+
+    text-overflow: ellipsis;
+
+    color: #56a8db;
+  }
+  &__column-enabled {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+
+    margin-top: -10px;
+
+    .st2-label__label {
+      overflow: hidden;
+
+      width: 16px;
+      height: 16px;
+      padding: 0;
+
+      text-indent: -100000px;
+
+      border-radius: 8px;
+    }
+  }
+  &__column-desc {
+    padding-right: 35px;
+  }
+  &__label {
+    font-size: 22px;
+    line-height: 32px;
+
+    float: left;
+
+    margin-right: 10px;
+
+    text-transform: uppercase;
+
+    color: #b7d2da;
+  }
+  &__name {
+    font-weight: bold;
+
+    position: relative;
+    top: -2px;
+
+    display: block;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    color: @aqua-base;
+  }
+  &__description {
+    position: relative;
+    top: -2px;
+
+    display: block;
+    overflow: hidden;
+
+    margin-bottom: -4px;
+
+    text-overflow: ellipsis;
+  }
+
+  .st2-pack-icon {
+    float: left;
+
+    margin: -5px 12px -5px 2px;
+  }
+}

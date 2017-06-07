@@ -27,8 +27,6 @@ module.exports = function st2RulesConfig($stateProvider) {
     }))
     .state('rules.code', Object.assign({}, baseState, {
       url: '/{ref:[\\w.-]+}/code?edit'
-    }))
-
-    ;
+    }));
 
 };

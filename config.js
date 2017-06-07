@@ -1,14 +1,10 @@
 'use strict';
 angular.module('main')
   .constant('st2Config', {
-
-    // hosts: [{
-    //   name: 'Dev Env',
-    //   url: '//172.168.50.50:9101'
-    // }, {
-    //   name: 'Express',
-    //   url: '//172.168.90.50:9101',
-    //   auth: true
-    // }]
-
+     // hosts: [{
+     //   name: 'Dev Env',
+     //   api: 'https://ansible.theatro.com:443/api',
+     //   url: 'https://ansible.theatro.com',
+     //   auth: 'https://ansible.theatro.com:443/auth'
+     // }]
   });

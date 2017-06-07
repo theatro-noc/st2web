@@ -1,5 +1,6 @@
+// I dont want to run a webserver
+/*
 'use strict';
-
 var gulp = require('gulp')
   , settings = require('../settings.json')
   , plugins = require('gulp-load-plugins')(settings.plugins)
@@ -16,3 +17,4 @@ gulp.task('serve', function () {
 
   return server;
 });
+*/
