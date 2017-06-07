@@ -1,7 +1,11 @@
 {
   "name": "st2web",
   "version": "0.0.0",
+<<<<<<< HEAD
   "st2_version": "2.3dev",
+=======
+  "st2_version": "2.2.1",
+>>>>>>> c9dc032d651620983bfb7f19a0ddf757b37dec89
   "private": true,
   "scripts": {
     "test": "gulp test"
